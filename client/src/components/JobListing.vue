@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="jobs-container">
     <h2>Jobs Listing</h2>
 
     <!-- Link to job posting form -->
-    <router-link to="/create-job">Post a Job</router-link>
+    <router-link class="post-job-link" to="/create-job">Post a Job</router-link>
     
     <!-- Filter form -->
-    <form @submit.prevent="applyFilters">
-      <label style="display:none">
+    <form @submit.prevent="applyFilters" class="filter-form">
+      <label class="hidden">
         Category:
         <input type="text" v-model="filters.category">
       </label>
@@ -15,7 +15,7 @@
         Location:
         <input type="text" v-model="filters.location">
       </label>
-      <label style="display:none">
+      <label class="hidden">
         Keywords:
         <input type="text" v-model="filters.keywords">
       </label>
@@ -23,7 +23,7 @@
     </form>
 
     <!-- Display job listings in a table -->
-    <table>
+    <table class="job-table">
       <thead>
         <tr>
           <th>Job Title</th>
@@ -31,7 +31,6 @@
           <th>Location</th>
           <th>Created At</th>
           <th>Actions</th> <!-- New column for actions -->
-          <!-- Add more table headers as needed -->
         </tr>
       </thead>
       <tbody>
@@ -42,15 +41,14 @@
           <td>{{ formatDate(job.created_at) }}</td>
           <td>
             <!-- Button to view job details -->
-            <button @click="viewJobDetails(job)">View Details</button>
+            <button @click="viewJobDetails(job)" class="view-details-button">View Details</button>
           </td>
-          <!-- Add more table cells as needed -->
         </tr>
       </tbody>
     </table>
 
     <!-- Pagination controls -->
-    <div>
+    <div class="pagination">
       <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
       <span>Page {{ currentPage }} of {{ totalPages }}</span>
       <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
@@ -104,7 +102,6 @@ export default {
   methods: {
     viewJobDetails(job) {
       // Redirect to a separate route or component for job details
-      // You can pass the job ID as a route parameter or as props to the job details component
       this.$router.push({ name: 'JobDetails', params: { jobId: job.id } });
     },
     fetchJobs() {
@@ -147,19 +144,108 @@ export default {
 </script>
 
 <style scoped>
-/* Component styles */
-table {
+.jobs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+.post-job-link {
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.filter-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filter-form label {
+  margin-right: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.filter-form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filter-form button {
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-form button:hover {
+  background-color: #2980b9;
+}
+
+.job-table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
-th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+.job-table th,
+.job-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
 }
 
-th {
+.job-table th {
   background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.view-details-button {
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-details-button:hover {
+  background-color: #2980b9;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 </style>

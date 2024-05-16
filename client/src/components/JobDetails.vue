@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div class="job-details-container">
     <h2>Job Details</h2>
     <!-- Display job data here -->
-    <div v-if="jobData">
-      <p><strong>Job Title:</strong> {{ jobData.job.job_title }}</p>
-      <p><strong>Company:</strong> {{ jobData.job.company_name }}</p>
-      <p><strong>Location:</strong> {{ jobData.job.location }}</p>
+    <div v-if="jobData" class="job-details">
+      <p><strong>Job Title:</strong> <br> {{ jobData.job.job_title }}</p>
+      <p><strong>Company:</strong> <br> {{ jobData.job.company_name }}</p>
+      <p><strong>Location:</strong> <br> {{ jobData.job.location }}</p>
       <!-- Add more job details as needed -->
     </div>
     <!-- Button to apply for the job -->
-    <button @click="applyForJob" v-if="jobData">Apply for Job</button>
+    <button @click="applyForJob" v-if="jobData" class="apply-button">Apply for Job</button>
     <!-- Display confirmation message -->
-    <div v-if="showConfirmation">
+    <div v-if="showConfirmation" class="confirmation-message">
       <p>Application submitted successfully!</p>
     </div>
   </div>
@@ -71,5 +71,52 @@ export default {
 </script>
 
 <style scoped>
-/* Component styles */
+.job-details-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.job-details p {
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.apply-button {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.apply-button:hover {
+  background-color: #2980b9;
+}
+
+.confirmation-message {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+  border-radius: 5px;
+  text-align: center;
+}
 </style>
